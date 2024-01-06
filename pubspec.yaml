@@ -1,0 +1,37 @@
+name: z_shop
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0-56.0.dev <4.0.0'
+
+dependencies:
+  bloc: ^8.1.2
+  carousel_slider: ^4.2.1
+  cupertino_icons: ^1.0.2
+  dio: ^5.3.3
+  dotted_border: ^2.1.0
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.3
+  fluttertoast: ^8.2.4
+  shared_preferences: ^2.2.2
+
+dev_dependencies:
+  flutter_lints: ^3.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/onBoarding/
+    - assets/
+  fonts:
+    - family: BrownSuger
+      fonts:
+        - asset: assets/BrownSugar.ttf

@@ -9,6 +9,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:z_shop/models/homeModel.dart';
 import 'package:z_shop/shared/componants/componants.dart';
 
+import 'viewProductScreen.dart';
+
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
 
@@ -25,7 +27,7 @@ class ProductsScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = ShopCubit.get(context);
         if (cubit.homeModel == null) {
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         } else {
           return Scaffold(
             body: Center(
@@ -109,49 +111,54 @@ Widget buildProducts(HomeModel? homeModel, context) {
 }
 
 Widget buildProductWidget(ProductModel model, context) {
-  return DottedBorder(
-    padding: const EdgeInsets.all(8.0),
-    color: mainColor,
-    child: Stack(
-      children: [
-        Column(
-          children: [
-            Image(
-              height: 100,
-              width: 130,
-              image: NetworkImage(model.image.toString()),
-            ),
-            Text(
-              model.name.toString(),
-              maxLines: 1,
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              model.price.toString() + " EGP ",
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.blue),
-            ),
-            Text(
-              model.oldPrice.toString(),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 10,
-                  color: Colors.grey,
-                  decoration: TextDecoration.lineThrough),
-            )
-          ],
-        ),
-        Align(
-          alignment: Alignment.topRight,
-          child: IconButton(
-              icon: Icon(ShopCubit.get(context).favorites[model.id]!
-                  ? Icons.favorite
-                  : Icons.favorite_border),
-              onPressed: () {
-                ShopCubit.get(context).changeFavorites(model.id!.toInt());
-              }),
-        )
-      ],
+  return InkWell(
+    onTap: () {
+      navigateTo(context, ViewProductScreen());
+    },
+    child: DottedBorder(
+      padding: const EdgeInsets.all(8.0),
+      color: mainColor,
+      child: Stack(
+        children: [
+          Column(
+            children: [
+              Image(
+                height: 100,
+                width: 130,
+                image: NetworkImage(model.image.toString()),
+              ),
+              Text(
+                model.name.toString(),
+                maxLines: 1,
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                model.price.toString() + " EGP ",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.blue),
+              ),
+              Text(
+                model.oldPrice.toString(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.grey,
+                    decoration: TextDecoration.lineThrough),
+              )
+            ],
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: IconButton(
+                icon: Icon(ShopCubit.get(context).favorites[model.id]!
+                    ? Icons.favorite
+                    : Icons.favorite_border),
+                onPressed: () {
+                  ShopCubit.get(context).changeFavorites(model.id!.toInt());
+                }),
+          )
+        ],
+      ),
     ),
   );
 }
@@ -183,4 +190,8 @@ Widget _buildCategoryTap() {
       ),
     ),
   );
+}
+
+void navigateTo(BuildContext context, Widget screen) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
 }

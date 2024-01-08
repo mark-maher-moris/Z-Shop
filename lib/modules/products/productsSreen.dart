@@ -195,3 +195,6 @@ Widget _buildCategoryTap() {
 void navigateTo(BuildContext context, Widget screen) {
   Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
 }
+
+
+

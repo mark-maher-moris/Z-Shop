@@ -61,7 +61,7 @@ class ViewProductScreen extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        'Connectionless (UDP): UDP is a connectionless protocol where each datagram (packet) is sent independently without establishing a connection. It does not guarantee delivery or order of packets, and there is no handshaking process before data transfer.',
+                        'Connectionless (UDP): UDP is a connectpendently without establishing a connection. It does not guarantee delivery or order of packets, and there is no handshaking process before data transfer.',
                         style: TextStyle(fontSize: 15),
                       ),
                     ]),
@@ -90,6 +90,12 @@ class ViewProductScreen extends StatelessWidget {
                 ),
               )
             ],
+
+
+
+
+
+            
           ),
         ),
       ),

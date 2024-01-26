@@ -68,7 +68,7 @@ Widget _buildSideCategoryBox() {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold),
                 ),
                 Icon(

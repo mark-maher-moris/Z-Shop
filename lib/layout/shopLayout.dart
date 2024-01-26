@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:z_shop/core/themes/themes.dart';
 import 'package:z_shop/layout/cubit/shop_cubit.dart';
 import 'package:z_shop/modules/search/searchScreen.dart';
-import 'package:z_shop/shared/chach_helper.dart';
-
 import '../core/consts.dart';
 
 class ShopLayout extends StatelessWidget {

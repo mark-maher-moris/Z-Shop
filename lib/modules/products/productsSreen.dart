@@ -1,11 +1,11 @@
 import 'dart:ui';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:z_shop/core/themes/themes.dart';
 import 'package:z_shop/layout/cubit/shop_cubit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:z_shop/models/categoriesModel.dart';
 import 'package:z_shop/models/homeModel.dart';
 import 'package:z_shop/shared/componants/componants.dart';
 
@@ -26,12 +26,13 @@ class ProductsScreen extends StatelessWidget {
       },
       builder: (context, state) {
         var cubit = ShopCubit.get(context);
-        if (cubit.homeModel == null) {
+        if (cubit.homeModel == null || cubit.categoriesModel == null) {
           return Center(child: CircularProgressIndicator());
         } else {
           return Scaffold(
             body: Center(
-              child: buildProducts(cubit.homeModel, context),
+              child: buildProducts(
+                  cubit.homeModel, context, cubit.categoriesModel),
             ),
           );
         }
@@ -40,7 +41,8 @@ class ProductsScreen extends StatelessWidget {
   }
 }
 
-Widget buildProducts(HomeModel? homeModel, context) {
+Widget buildProducts(
+    HomeModel? homeModel, context, CategoriesModel? categoriesModel) {
   return SingleChildScrollView(
     child: Column(
       children: [
@@ -86,9 +88,10 @@ Widget buildProducts(HomeModel? homeModel, context) {
           height: 60,
           child: ListView.builder(
               shrinkWrap: false,
-              itemCount: 4,
+              itemCount: categoriesModel!.data!.data?.length,
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => _buildCategoryTap()),
+              itemBuilder: (context, index) =>
+                  _buildCategoryTap(categoriesModel.data?.data?[index])),
         ),
         SizedBox(
           height: 10,
@@ -163,7 +166,7 @@ Widget buildProductWidget(ProductModel model, context) {
   );
 }
 
-Widget _buildCategoryTap() {
+Widget _buildCategoryTap(model) {
   return Container(
     margin: EdgeInsets.all(5),
     padding: EdgeInsets.only(bottom: 6),
@@ -180,7 +183,7 @@ Widget _buildCategoryTap() {
         borderRadius: BorderRadius.all(Radius.circular(10)),
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
-            'Mobile',
+            model.name.toString(),
             style: TextStyle(
                 fontFamily: 'BrownSuger',
                 fontWeight: FontWeight.bold,
@@ -195,6 +198,3 @@ Widget _buildCategoryTap() {
 void navigateTo(BuildContext context, Widget screen) {
   Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
 }
-
-
-

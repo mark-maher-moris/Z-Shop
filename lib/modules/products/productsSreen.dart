@@ -87,6 +87,7 @@ Widget buildProducts(
         Container(
           height: 60,
           child: ListView.builder(
+              reverse: true,
               shrinkWrap: false,
               itemCount: categoriesModel!.data!.data?.length,
               scrollDirection: Axis.horizontal,
@@ -97,6 +98,7 @@ Widget buildProducts(
           height: 10,
         ),
         GridView.count(
+          reverse: true,
           shrinkWrap: true,
           crossAxisCount: 2,
           mainAxisSpacing: 10,

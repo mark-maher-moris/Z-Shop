@@ -1,86 +1,141 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:z_shop/layout/cubit/shop_cubit.dart';
+import 'package:z_shop/models/categoriesModel.dart';
+import 'package:z_shop/modules/products/productsSreen.dart';
+import '../../core/themes/themes.dart';
+import '../../shared/componants/componants.dart';
+
+String? selectedCategoryId;
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
-
+  CategoriesScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            body: Row(
-      children: [
-        Expanded(
-          flex: 1,
-          child: SingleChildScrollView(
-              child: Column(
+    return BlocConsumer<ShopCubit, ShopStates>(
+      listener: (context, state) {
+        if (state is ShopSuccessChangeFavoritesState) {
+          if (state.model.status == false) {
+            showToast(state.model.message, Colors.red);
+          }
+        }
+      },
+      builder: (context, state) {
+        var cubit = ShopCubit.get(context);
+        if (cubit.categoriesModel == null) {
+          return Center(child: CircularProgressIndicator());
+        } else {
+          return Scaffold(
+              body: Row(
             children: [
-              _buildSideCategoryBox(),
-              _buildSideCategoryBox(),
-              _buildSideCategoryBox(),
-              _buildSideCategoryBox(),
-              _buildSideCategoryBox(),
-              _buildSideCategoryBox(),
+              Expanded(
+                  flex: 2,
+                  child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    itemCount: cubit.categoriesModel!.data?.data?.length,
+                    shrinkWrap: false,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (context, index) => CategorySideBox(
+                        model: cubit.categoriesModel!.data?.data?[index]),
+                  )),
+              VerticalDivider(),
+              Expanded(
+                  flex: 3,
+                  child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    itemCount: cubit.homeModel!.data!.products!.length,
+                    shrinkWrap: false,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (context, index) => buildProductWidget(
+                        cubit.homeModel!.data!.products![index], context),
+                  )),
             ],
-          )),
-        ),
-        VerticalDivider(),
-        Expanded(
-          flex: 3,
-          child: SingleChildScrollView(
-              child: Column(
-            children: [],
-          )),
-        ),
-      ],
-    )));
+          ));
+        }
+      },
+    );
   }
 }
 
-Widget _buildSideCategoryBox() {
-  return InkWell(
-    onTap: () {},
-    child: Container(
-      margin: EdgeInsets.all(5),
-      //width: 100,
-      height: 100,
-      decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.all(Radius.circular(20))),
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image.network(
-              "https://rukminim2.flixcart.com/image/832/832/xif0q/bag/g/r/j/large-size-high-quality-stylish-backpack-casual-school-bag-class-original-imagkk9c8zg4kdjy.jpeg?q=70",
-              fit: BoxFit.cover,
-              height: double.infinity,
-              width: double.infinity,
+class CategorySideBox extends StatefulWidget {
+  CategorySideBox({required this.model});
+  var model;
+  @override
+  State<CategorySideBox> createState() => _CategorySideBoxState();
+}
+
+class _CategorySideBoxState extends State<CategorySideBox> {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        print(widget.model.name);
+        setState(() {
+          selectedCategoryId = widget.model.id.toString();
+        });
+      },
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            top: 5,
+            //right: 5,
+            child: Container(
+              margin: EdgeInsets.all(5),
+              height: 100,
+              width: 110,
+              decoration: BoxDecoration(
+                  color: selectedCategoryId == widget.model.id
+                      ? const Color.fromARGB(255, 60, 255, 67)
+                      : mainColor,
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
             ),
-            Container(
-              color: const Color.fromARGB(92, 0, 0, 0),
+          ),
+          Container(
+            margin: EdgeInsets.all(5),
+            //width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.network(
+                    widget.model.image,
+                    fit: BoxFit.cover,
+                    height: double.infinity,
+                    width: double.infinity,
+                  ),
+                  Container(
+                    color: Color.fromARGB(121, 0, 0, 0),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        widget.model.name,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                        size: 15,
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Catego Name",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold),
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.white,
-                  size: 15,
-                )
-              ],
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
-    ),
-  );
+    );
+  }
 }

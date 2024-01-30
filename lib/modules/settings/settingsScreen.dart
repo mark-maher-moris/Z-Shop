@@ -7,13 +7,27 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(title: Text('Settings Screen '),),
       body: Center(
-child: Column(children: [
-Text('Name',style: TextStyle(fontSize: 20),),
-Text('Email',style: TextStyle(fontSize: 20),),
-
-],),
+        child: Column(
+          children: [
+            CircleAvatar(
+              radius: 50,
+            ),
+            Text(
+              'Mark Maher',
+              style: TextStyle(fontSize: 20),
+            ),
+            Text(
+              'mkmkmkjnhb@gmail.com',
+              style: TextStyle(fontSize: 20, color: Colors.blue),
+            ),
+            Text(
+              '01210153804',
+              style: TextStyle(fontSize: 20),
+            ),
+            Divider(),
+          ],
+        ),
       ),
     ));
   }

@@ -8,7 +8,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:z_shop/models/categoriesModel.dart';
 import 'package:z_shop/models/homeModel.dart';
 import 'package:z_shop/shared/componants/componants.dart';
-
 import 'viewProductScreen.dart';
 
 class ProductsScreen extends StatelessWidget {
@@ -118,7 +117,7 @@ Widget buildProducts(
 Widget buildProductWidget(ProductModel model, context) {
   return InkWell(
     onTap: () {
-      navigateTo(context, ViewProductScreen());
+      navigateTo(context, ViewProductScreen(productModel: model));
     },
     child: DottedBorder(
       padding: const EdgeInsets.all(8.0),

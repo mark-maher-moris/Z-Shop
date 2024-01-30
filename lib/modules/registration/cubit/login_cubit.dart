@@ -12,7 +12,7 @@ import 'package:z_shop/shared/chach_helper.dart';
 
 import 'package:z_shop/shared/dio_helper.dart';
 
-import 'package:z_shop/modules/registration/cubit/cubit/login_state.dart';
+import 'package:z_shop/modules/registration/cubit/login_state.dart';
 
 import 'package:z_shop/network/endPoints.dart';
 

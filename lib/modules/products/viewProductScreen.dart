@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:z_shop/core/themes/themes.dart';
+import '../../models/homeModel.dart';
 
 class ViewProductScreen extends StatelessWidget {
-  const ViewProductScreen({super.key});
-
+  ViewProductScreen({super.key, required this.productModel});
+  ProductModel productModel;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,9 +28,12 @@ class ViewProductScreen extends StatelessWidget {
                       borderRadius:
                           BorderRadius.only(bottomLeft: Radius.circular(30)),
                       child: Container(
-                        color: mainColor,
+                        height: 400,
+                        color: Colors.white,
                         child: Image.network(
-                            'https://avatars.githubusercontent.com/u/66829236?v=4'),
+                          productModel.image.toString(),
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                   )
@@ -44,7 +48,7 @@ class ViewProductScreen extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        'Name is here',
+                        productModel.name.toString(),
                         style: TextStyle(
                             fontSize: 25, fontWeight: FontWeight.bold),
                       ),
@@ -52,7 +56,7 @@ class ViewProductScreen extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        '202\$',
+                        '${productModel.price} \$',
                         style: TextStyle(
                             color: const Color.fromARGB(255, 0, 63, 114),
                             fontSize: 20),
@@ -60,17 +64,17 @@ class ViewProductScreen extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        'Connectionless (UDP): UDP is a connectpendently without establishing a connection. It does not guarantee delivery or order of packets, and there is no handshaking process before data transfer.',
-                        style: TextStyle(fontSize: 15),
-                      ),
+                      // Text(
+                      //   'Connectionless (UDP): UDP is a connectpendently without establishing a connection. It does not guarantee delivery or order of packets, and there is no handshaking process before data transfer.',
+                      //   style: TextStyle(fontSize: 15),
+                      // ),
                     ]),
               ),
               Center(
                 child: Container(
                   margin: EdgeInsets.all(20),
                   height: 70,
-                  width: 120,
+                  width: 150,
                   child: Center(
                       child: Text(
                     'Add To Cart',
@@ -90,12 +94,6 @@ class ViewProductScreen extends StatelessWidget {
                 ),
               )
             ],
-
-
-
-
-
-            
           ),
         ),
       ),

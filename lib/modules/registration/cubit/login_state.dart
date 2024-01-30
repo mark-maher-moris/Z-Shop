@@ -10,7 +10,7 @@
 // final class LoginInitial extends LoginState {}
 
 
-import '../../../../models/loginModel.dart';
+import '../../../models/loginModel.dart';
 
 
 abstract class LoginStates {}

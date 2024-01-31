@@ -12,6 +12,7 @@ class SettingsScreen extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 50,
+              backgroundImage: AssetImage('assets/AccountPhoto.jpg'),
             ),
             Text(
               'Mark Maher',

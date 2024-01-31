@@ -65,7 +65,6 @@ class ShopCubit extends Cubit<ShopStates> {
   void changeFavorites(int productId) {
     emit(ShopLoadingGetFavoritesState());
     favorites[productId] = !favorites[productId]!;
-    emit(ShopSuccessChangeFavoritesState(changeFavoritesModel!));
 
     DioHelper.getData(
             url: FAVORITES, query: {'product_id': productId}, token: token)

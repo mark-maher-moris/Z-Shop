@@ -1,8 +1,10 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../core/themes/themes.dart';
+import '../products/productsSreen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -38,9 +40,15 @@ class SettingsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                    radius: 50,
-                    backgroundImage: AssetImage('assets/profile.jpg')),
+                DottedBorder(
+                  borderType: BorderType.Circle,
+                  color: const Color.fromARGB(255, 187, 21, 9),
+                  strokeWidth: 3,
+                  dashPattern: [5, 5],
+                  child: CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage('assets/profile.jpg')),
+                ),
                 SizedBox(
                   height: 40,
                 ),
@@ -119,7 +127,7 @@ Widget profileBtn({required String title}) {
       margin: EdgeInsets.all(10),
       child: Center(child: Text(title)),
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 255, 173, 173),
+          color: Color.fromARGB(255, 245, 187, 187),
           borderRadius: BorderRadius.all(Radius.circular(15)),
           border: Border.all(color: Colors.red, width: 2)),
     ),

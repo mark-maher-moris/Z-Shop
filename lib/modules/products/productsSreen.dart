@@ -93,7 +93,7 @@ Widget buildProducts(
               itemCount: categoriesModel!.data!.data?.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) =>
-                  _buildCategoryTap(categoriesModel.data?.data?[index])),
+                  buildCategoryTap(categoriesModel.data?.data?[index].image)),
         ),
         SizedBox(
           height: 10,
@@ -169,7 +169,7 @@ Widget buildProductWidget(ProductModel model, context) {
   );
 }
 
-Widget _buildCategoryTap(model) {
+Widget buildCategoryTap(name) {
   return Container(
     margin: EdgeInsets.all(5),
     padding: EdgeInsets.only(bottom: 6),
@@ -186,7 +186,7 @@ Widget _buildCategoryTap(model) {
         borderRadius: BorderRadius.all(Radius.circular(10)),
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
-            model.name.toString(),
+           name.toString(),
             style: TextStyle(
                 fontFamily: fontName,
                 fontWeight: FontWeight.bold,

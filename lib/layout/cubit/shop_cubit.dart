@@ -9,7 +9,7 @@ import 'package:z_shop/models/homeModel.dart';
 import 'package:z_shop/modules/categories/categoriesScreen.dart';
 import 'package:z_shop/modules/favorites/favoritesScreen.dart';
 import 'package:z_shop/modules/products/productsSreen.dart';
-import 'package:z_shop/modules/settings/settingsScreen.dart';
+import 'package:z_shop/modules/profile/profileScreen.dart';
 import 'package:z_shop/network/endPoints.dart';
 import 'package:z_shop/shared/dio_helper.dart';
 

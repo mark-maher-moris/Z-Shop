@@ -4,21 +4,19 @@ import 'package:z_shop/core/consts.dart';
 import 'package:z_shop/models/loginModel.dart';
 import 'package:z_shop/shared/dio_helper.dart';
 import '../../../network/endPoints.dart';
-import 'cart_state.dart';
+import 'profile_state.dart';
 
-class CartCubit extends Cubit<CartStates> {
-  CartCubit() : super(CartInitialState());
+class ProfileCubit extends Cubit<ProfileStates> {
+  ProfileCubit() : super(ProfileInitialState());
 
-  static CartCubit get(context) {
+  static ProfileCubit get(context) {
     return BlocProvider.of(context);
   }
-
   LoginModel? loginModel;
-
   addToCart({
     required String productId,
   }) {
-    emit(CartLoadingState());
+    emit(ProfileLoadingState());
     DioHelper.postData(
             url: CART,
             data: {'product_id': productId},
@@ -26,7 +24,7 @@ class CartCubit extends Cubit<CartStates> {
             query: null)
         .then((value) {})
         .catchError((error) {
-      emit(CartErrorState(error));
+      emit(ProfileErrorState(error));
 
       print(error);
     });

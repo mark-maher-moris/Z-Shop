@@ -11,12 +11,14 @@ class SettingsScreen extends StatelessWidget {
         child: Scaffold(
             body: Stack(
       children: [
+        Image.network(
+            'https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2536.jpg?t=st=1706734534~exp=1706735134~hmac=6d827755d521d3031a297cc756753fbf5f736c5fe03f8c8c4cfbeae4be0fe9c4'),
         ClipPath(
           clipper: MyClipper(),
           child: Container(
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
-            color: mainColor,
+            color: Colors.white,
           ),
         ),
         SingleChildScrollView(
@@ -36,6 +38,12 @@ class SettingsScreen extends StatelessWidget {
                 profileBox(title: 'Phone', value: '01210153804'),
                 profileBox(title: 'Points', value: '233'),
                 profileBox(title: 'Credits', value: '2'),
+                Row(
+                  children: [
+                    profileBtn(title: 'Delete Account'),
+                    profileBtn(title: 'Sign Out'),
+                  ],
+                ),
               ],
             ),
           ),
@@ -84,4 +92,19 @@ class MyClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return false;
   }
+}
+
+Widget profileBtn({required String title}) {
+  return InkWell(
+    onTap: () {},
+    child: Container(
+      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.all(10),
+      child: Center(child: Text(title)),
+      decoration: BoxDecoration(
+          color: Color.fromARGB(255, 255, 154, 154),
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          border: Border.all(color: Colors.red, width: 2)),
+    ),
+  );
 }

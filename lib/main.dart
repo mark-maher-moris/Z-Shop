@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:z_shop/core/consts.dart';
-import 'package:z_shop/core/themes/themes.dart';
 import 'package:z_shop/layout/cubit/shop_cubit.dart';
 import 'package:z_shop/layout/shopLayout.dart';
 import 'package:z_shop/modules/registration/loginScreen.dart';

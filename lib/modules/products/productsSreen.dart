@@ -8,6 +8,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:z_shop/models/categoriesModel.dart';
 import 'package:z_shop/models/homeModel.dart';
 import 'package:z_shop/shared/componants/componants.dart';
+import '../../mainAppBar.dart';
 import 'viewProductScreen.dart';
 
 class ProductsScreen extends StatelessWidget {
@@ -29,6 +30,7 @@ class ProductsScreen extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         } else {
           return Scaffold(
+            appBar: mainAppBar(context: context),
             body: Center(
               child: buildProducts(
                   cubit.homeModel, context, cubit.categoriesModel),
@@ -53,7 +55,7 @@ Widget buildProducts(
                     textAlign: TextAlign.center,
                     text: TextSpan(
                         style: TextStyle(
-                            fontFamily: 'BrownSuger',
+                            fontFamily: fontName,
                             color: Colors.black,
                             height: 1.5,
                             fontSize: 50),
@@ -186,7 +188,7 @@ Widget _buildCategoryTap(model) {
           Text(
             model.name.toString(),
             style: TextStyle(
-                fontFamily: 'BrownSuger',
+                fontFamily: fontName,
                 fontWeight: FontWeight.bold,
                 color: Colors.white),
           )

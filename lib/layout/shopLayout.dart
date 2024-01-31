@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:z_shop/layout/cubit/shop_cubit.dart';
-import 'package:z_shop/modules/search/searchScreen.dart';
-import '../core/consts.dart';
 
 class ShopLayout extends StatelessWidget {
   const ShopLayout({super.key});
@@ -14,31 +12,7 @@ class ShopLayout extends StatelessWidget {
       builder: (context, state) {
         var cubit = ShopCubit.get(context);
         return Scaffold(
-          appBar: AppBar(
-              backgroundColor: Colors.white,
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SearchScreen()));
-                    },
-                    icon: Icon(Icons.search))
-              ],
-              title: Container(
-                  height: 60,
-                  width: 100,
-                  child: Image.asset(
-                    logoPath,
-                    fit: BoxFit.contain,
-                  ))
-              //  TextButton(
-              //     onPressed: () {
-              //       CacheHelper.removeData;
-              //     },
-              //     child: Text('SIGN OUT')),
-              ),
+        
           body: cubit.bottomScreens[cubit.currentScreenIndex],
           bottomNavigationBar: BottomNavigationBar(
               backgroundColor: Colors.green,

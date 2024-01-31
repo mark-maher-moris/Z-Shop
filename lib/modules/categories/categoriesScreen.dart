@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:z_shop/layout/cubit/shop_cubit.dart';
-import 'package:z_shop/models/categoriesModel.dart';
 import 'package:z_shop/modules/products/productsSreen.dart';
 import '../../core/themes/themes.dart';
 import '../../shared/componants/componants.dart';
+import '../../mainAppBar.dart';
 
 String? selectedCategoryId;
 
@@ -26,6 +26,7 @@ class CategoriesScreen extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         } else {
           return Scaffold(
+            appBar:  mainAppBar(context: context),
               body: Row(
             children: [
               Expanded(
